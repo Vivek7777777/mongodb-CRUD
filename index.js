@@ -34,8 +34,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/crudDB", {useNewUrlParser: true, use
 // async function run(){
 //     try{
 //         const user = await User.create({
-//             name: "Wick",
-//             age: 20,
+//             name: "Jaddu",
+//             age: 22,
 //             email: "test@gmail.com",
 //             hobbies: ["reading", "cooking"],
 //             address: {
@@ -87,3 +87,27 @@ mongoose.connect("mongodb://127.0.0.1:27017/crudDB", {useNewUrlParser: true, use
 // UPdate();
 
 
+
+//METHOD TESTING
+async function runn(){
+    try{
+        // const user = await User.find({name: "Jaddu"});
+
+    //using findByName static method defined in user.js file
+        // const user = await User.findByName("Jaddu");
+
+    //using byName query method defined in user.js file
+        const user = await User.find().byName("Jaddu");
+    
+    //using virtual function
+        console.log(user[0].namedEmail);
+
+        console.log(user);
+        user[0].sayy();
+    }
+    catch(err){
+        console.log(err.message);
+    }
+}
+
+runn();

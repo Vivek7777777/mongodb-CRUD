@@ -55,8 +55,50 @@ const userSchema = new mongoose.Schema({
     //     street: String,
     //     city: String
     // }
-});
+},
 
+//add methods to schema
+
+// {
+//     methods: {
+//         sayy(){
+//             let greeting = "Hello, my name is " + this.name;
+//             console.log(greeting);
+//            // return greeting;
+//         }
+//     }
+// }
+
+);
+
+
+//add methods to schema
+
+userSchema.methods.sayy = function() {
+  var greeting = "Hello, my name is " + this.name;
+  console.log(greeting);
+}
+
+
+// add static method
+
+userSchema.statics.findByName =  function (name){
+    return this.find({ name: new RegExp(name, "i")});
+}
+
+// add query method
+
+userSchema.query.byName = function (name){
+    return this.where({name: new RegExp(name, "i")});
+}
+
+// VIRTUAL METHODS ARE NOT SAVED IN DATABASE THEY ARE ONLY USED LOCALLY
+
+userSchema.virtual("namedEmail").get(
+    function(){
+        return `${this.name} <${this.email}>`
+    }
+)
 
 
 //create model
