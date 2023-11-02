@@ -91,19 +91,26 @@ mongoose.connect("mongodb://127.0.0.1:27017/crudDB", {useNewUrlParser: true, use
 //METHOD TESTING
 async function runn(){
     try{
-        // const user = await User.find({name: "Jaddu"});
+        // const user = await User.find();
 
     //using findByName static method defined in user.js file
         // const user = await User.findByName("Jaddu");
 
     //using byName query method defined in user.js file
-        const user = await User.find().byName("Jaddu");
-    
+        // const user = await User.find().byName("Jaddu");
+        const user = await User.findOne().byName("Sam");
+
     //using virtual function
-        console.log(user[0].namedEmail);
+        // console.log(user[0].namedEmail);
+        // console.log(user.namedEmail); //findOne
 
         console.log(user);
-        user[0].sayy();
+        await user.save();
+        console.log(user);
+
+        // user[0].sayy();
+        // user.sayy();  //findOne
+
     }
     catch(err){
         console.log(err.message);

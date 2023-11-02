@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema({
     },
     updatedAt: {
         type: Date,
-        immutable: true,
+        // immutable: true,
         default: () => Date.now()
     },
     // represent another user
@@ -99,6 +99,22 @@ userSchema.virtual("namedEmail").get(
         return `${this.name} <${this.email}>`
     }
 )
+
+
+//middleware
+//executes before save operation
+userSchema.pre("save", function(next){
+    this.updatedAt = Date.now();
+    next();  //continue executing next process  
+})
+
+//executes after save operation
+userSchema.post("save", function(doc, next){
+    doc.sayy();
+    next();
+})
+
+
 
 
 //create model
